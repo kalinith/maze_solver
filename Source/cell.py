@@ -1,4 +1,6 @@
 from graphics import Point, Line, Window
+
+
 class Cell():
 	def __init__(self, win=None):
 		self.has_left_wall = True
@@ -12,6 +14,8 @@ class Cell():
 		self._win = win
 
 	def draw(self, x1, x2, y1, y2):
+		if self._win is None:
+			return
 		self._x1 = x1
 		self._x2 = x2
 		self._y1 = y1
@@ -21,17 +25,29 @@ class Cell():
 		bottom_left = Point(self._x1, self._y2)
 		bottom_right = Point(self._x2, self._y2)
 		if self.has_left_wall:
-			left_line = Line(top_left, bottom_left)
-			self._win.draw_line(left_line)
+			colour = "black"
+		else:
+			colour = "green"
+		left_line = Line(top_left, bottom_left)
+		self._win.draw_line(left_line, colour)
 		if self.has_right_wall:
-			right_line = Line(top_right, bottom_right)
-			self._win.draw_line(right_line)
+			colour = "black"
+		else:
+			colour = "green"
+		right_line = Line(top_right, bottom_right)
+		self._win.draw_line(right_line, colour)
 		if self.has_top_wall:
-			top_line = Line(top_left, top_right)
-			self._win.draw_line(top_line)
+			colour = "black"
+		else:
+			colour = "green"
+		top_line = Line(top_left, top_right)
+		self._win.draw_line(top_line,colour)
 		if self.has_bottom_wall:
-			bottom_line = Line(bottom_left, bottom_right)
-			self._win.draw_line(bottom_line)
+			colour = "black"
+		else:
+			colour = "green"
+		bottom_line = Line(bottom_left, bottom_right)
+		self._win.draw_line(bottom_line,colour)
 
 	def draw_move(self, to_cell, undo=False):
 		x1 = (self._x1 + self._x2) / 2
