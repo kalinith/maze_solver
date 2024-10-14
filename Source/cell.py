@@ -1,6 +1,6 @@
 from graphics import Point, Line, Window
 class Cell():
-	def __init__(self, win):
+	def __init__(self, win=None):
 		self.has_left_wall = True
 		self.has_right_wall = True
 		self.has_top_wall = True
