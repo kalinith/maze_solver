@@ -27,7 +27,7 @@ class Maze():
 	def _create_cells(self):
 		for i in range(self._num_cols):
 			col_list = []
-			for j in range(self._num_cols):
+			for j in range(self._num_rows):
 				cell = Cell(self._win)
 				col_list.append(cell)
 			self._cells.append(col_list)
@@ -51,7 +51,7 @@ class Maze():
 		if self._win is None:
 			return
 		self._win.redraw()
-		time.sleep(0.5)
+		time.sleep(0.05)
 
 
 
