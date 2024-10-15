@@ -1,4 +1,5 @@
 import unittest
+import random
 from maze import Maze
 
 
@@ -55,6 +56,22 @@ class Tests(unittest.TestCase):
             False,
         )
 
+    def test_break_walls_r(self):
+        num_cols = 10
+        num_rows = 10
+        random.seed(0)
+        m1 = Maze(0, 0, num_rows, num_cols, 10, 10)
+        m1._break_walls_r(0,0)
+
+        self.assertEqual(
+            m1._cells[4][4].has_top_wall,
+            False,
+        )
+
+        self.assertEqual(
+            m1._cells[4][4].has_left_wall,
+            False,
+        )
 # add more testss
 
 if __name__ == "__main__":

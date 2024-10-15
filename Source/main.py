@@ -14,11 +14,11 @@ def main():
 	cell_start_y = 100
 	cell_no_columns = 10
 	cell_no_rows = 10
-	seed = None
+	seed = 0 #None
 
 	win = Window(window_width, window_height)
 
-	if seed != None:
+	if seed == None:
 		random.seed()
 	else:
 		random.seed(seed)
