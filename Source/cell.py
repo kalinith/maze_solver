@@ -11,6 +11,7 @@ class Cell():
 		self._x2 = None
 		self._y1 = None
 		self._y2 = None
+		self.visited = False
 		self._win = win
 
 	def draw(self, x1, x2, y1, y2):

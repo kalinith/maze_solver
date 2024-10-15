@@ -1,4 +1,6 @@
 import time
+import random
+
 from graphics import Window
 from cell import Cell
 
@@ -24,6 +26,8 @@ class Maze():
 
 		self._create_cells()
 		self._break_entrance_and_exit()
+		self._break_walls_r(0, 0)
+
 
 	def _create_cells(self):
 		for i in range(self._num_cols):
@@ -41,6 +45,51 @@ class Maze():
 		self._draw_cell(0,0)
 		self._cells[self._num_cols-1][self._num_rows-1].has_bottom_wall = False
 		self._draw_cell(self._num_cols-1,self._num_rows-1)
+
+	def _break_walls_r(self,i,j):
+		self._cells[i][j].visited = True
+		while True:
+			places_to_go = []
+			if i > 0:
+				if self._cells[i-1][j].visited == False:
+					tp = (i-1,j)
+					places_to_go.append(tp)
+			if i < len(self._cells) - 1:
+				if self._cells[i+1][j].visited == False:
+					tp = (i+1,j)
+					places_to_go.append(tp)
+			if j > 0:
+				if self._cells[i][j-1].visited == False:
+					tp = (i,j-1)
+					places_to_go.append(tp)
+			if j < len(self._cells[i]) -1:
+				if self._cells[i][j+1].visited == False:
+					tp = (i,j+1)
+					places_to_go.append(tp)
+			print(places_to_go)
+
+			if places_to_go == []:
+				self._draw_cell(i, j)
+				return
+
+			direction = random.randrange(len(places_to_go))
+			x, y = places_to_go[direction]
+			if x < i:
+				#left wall
+				self._cells[i][j].has_left_wall = False
+				self._cells[x][y].has_right_wall = False
+			if x > i:
+				self._cells[i][j].has_right_wall = False
+				self._cells[x][y].has_left_wall = False
+			if x == i and y < j:
+				self._cells[i][j].has_top_wall = False
+				self._cells[x][y].has_bottom_wall = False
+			if x == i and y > j:
+				self._cells[i][j].has_bottom_wall = False
+				self._cells[x][y].has_top_wall = False
+			self._break_walls_r(x, y)
+			
+
 
 	def _draw_cell(self, i, j):
 		if self._win is None:
