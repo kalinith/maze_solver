@@ -27,6 +27,7 @@ class Maze():
 		self._create_cells()
 		self._break_entrance_and_exit()
 		self._break_walls_r(0, 0)
+		self._reset_cells_visited()
 
 
 	def _create_cells(self):
@@ -40,11 +41,13 @@ class Maze():
 			for j in range(len(self._cells[i])):
 				self._draw_cell(i, j)
 
+
 	def _break_entrance_and_exit(self):
 		self._cells[0][0].has_top_wall = False
 		self._draw_cell(0,0)
 		self._cells[self._num_cols-1][self._num_rows-1].has_bottom_wall = False
 		self._draw_cell(self._num_cols-1,self._num_rows-1)
+
 
 	def _break_walls_r(self,i,j):
 		self._cells[i][j].visited = True
@@ -66,7 +69,6 @@ class Maze():
 				if self._cells[i][j+1].visited == False:
 					tp = (i,j+1)
 					places_to_go.append(tp)
-			print(places_to_go)
 
 			if places_to_go == []:
 				self._draw_cell(i, j)
@@ -75,7 +77,6 @@ class Maze():
 			direction = random.randrange(len(places_to_go))
 			x, y = places_to_go[direction]
 			if x < i:
-				#left wall
 				self._cells[i][j].has_left_wall = False
 				self._cells[x][y].has_right_wall = False
 			if x > i:
@@ -89,6 +90,11 @@ class Maze():
 				self._cells[x][y].has_top_wall = False
 			self._break_walls_r(x, y)
 			
+
+	def _reset_cells_visited(self):
+		for column in self._cells:
+			for cell in column:
+				cell.visited = False
 
 
 	def _draw_cell(self, i, j):
