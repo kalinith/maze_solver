@@ -12,6 +12,8 @@ class Cell():
 		self._y1 = None
 		self._y2 = None
 		self.visited = False
+		self.is_Start = True
+		self.is_end = False
 		self._win = win
 
 	def draw(self, x1, x2, y1, y2):
@@ -62,4 +64,4 @@ class Cell():
 		point_a = Point(x1, y1)
 		point_b = Point(x2, y2)
 		move_line = Line(point_a, point_b)
-		self.draw_line(move_line, colour)
+		self._win.draw_line(move_line, colour)
