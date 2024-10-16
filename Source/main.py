@@ -8,11 +8,11 @@ from maze import Maze
 def main():
 	window_width = 800
 	window_height = 600
-	cell_no_columns = 15
-	cell_no_rows = 10
+	cell_no_columns = 35
+	cell_no_rows = 25
 	window_margin = 10
-	cell_length_x = (window_width - (window_margin * 2)) // cell_no_columns
-	cell_length_y = (window_height - (window_margin * 2)) // cell_no_rows
+	cell_length_x = (window_width - (window_margin * 2)) / cell_no_columns
+	cell_length_y = (window_height - (window_margin * 2)) / cell_no_rows
 
 	seed = None
 
